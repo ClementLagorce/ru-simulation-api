@@ -8,7 +8,10 @@
 
     <properties>
         <compiler-plugin.version>3.14.1</compiler-plugin.version>
-        <quarkus.container-image.build>true</quarkus.container-image.build>
+        <!-- The image pipeline builds the image with -Dquarkus.container-image.build=true,
+             overriding registry and group. Off by default so that a plain mvn package
+             needs no Docker daemon. -->
+        <quarkus.container-image.build>false</quarkus.container-image.build>
         <quarkus.container-image.registry>your.registry</quarkus.container-image.registry>
         <quarkus.container-image.group>your-image-group</quarkus.container-image.group>
         <maven.compiler.release>25</maven.compiler.release>
@@ -135,15 +138,6 @@
                 <artifactId>quarkus-maven-plugin</artifactId>
                 <version>${quarkus.platform.version}</version>
                 <extensions>true</extensions>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>build</goal>
-                            <goal>generate-code</goal>
-                            <goal>generate-code-tests</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
